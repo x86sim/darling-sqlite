@@ -10,7 +10,7 @@ endif(COMMAND cmake_policy)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse -msse2 -msse3 -w -nostdinc")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__DARWIN_UNIX03 -fPIC")
 
-# x86Code: SQLITE_ENABLE_DESERIALIZE for sqlite3_serialize/sqlite3_deserialize (exported by macOS's libsqlite3; used by
+# x86Sim: SQLITE_ENABLE_DESERIALIZE for sqlite3_serialize/sqlite3_deserialize (exported by macOS's libsqlite3; used by
 # the simulator runtime's update_dyld_sim_shared_cache)
 add_definitions(-DHAVE_CONFIG_H -DSQLITE_ENABLE_FTS5 -DSQLITE_ENABLE_DESERIALIZE)
 

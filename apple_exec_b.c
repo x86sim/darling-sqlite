@@ -1,4 +1,4 @@
-// x86Code: Apple's block variant of sqlite3_exec. macOS's libsqlite3 exports it and update_dyld_sim_shared_cache
+// x86Sim: Apple's block variant of sqlite3_exec. macOS's libsqlite3 exports it and update_dyld_sim_shared_cache
 // (the iOS simulator runtime's dyld cache builder, run under Darling) imports it.
 #include "sqlite3.h"
 
