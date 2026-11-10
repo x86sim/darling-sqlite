@@ -7,7 +7,11 @@ if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW)
 endif(COMMAND cmake_policy)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse -msse2 -msse3 -w -nostdinc")
+# DARLING: -msse* is x86-only; gate by target arch.
+if (TARGET_i386 OR TARGET_x86_64)
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -msse -msse2 -msse3")
+endif()
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -w -nostdinc")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__DARWIN_UNIX03 -fPIC")
 
 # x86Sim: SQLITE_ENABLE_DESERIALIZE for sqlite3_serialize/sqlite3_deserialize (exported by macOS's libsqlite3; used by
@@ -33,6 +37,8 @@ if (NOT DARLING_NO_EXECUTABLES)
 	include(darling_exe)
 	add_darling_executable(sqlite shell.c)
 	target_link_libraries(sqlite sqlite3)
+	# The target name sqlite3 is taken by the library.
+	set_target_properties(sqlite PROPERTIES OUTPUT_NAME "sqlite3")
 
 	install(TARGETS sqlite DESTINATION libexec/darling/usr/bin)
 endif (NOT DARLING_NO_EXECUTABLES)
